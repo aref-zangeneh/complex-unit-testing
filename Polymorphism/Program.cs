@@ -11,9 +11,9 @@ namespace Polymorphism
         public virtual string CalculateWeeklySalary(int weeklyHours, int wage)
         {
             var salary = 40 * wage;
-            string result = string.Format(" Angry Employee Worked {0} hrs." +
-                "Paid for 40 hrs at ${1}" +
-                "/hr = ${2} ", weeklyHours, wage, salary);
+            string result = $" Angry Employee Worked {weeklyHours} hrs." +
+                $"Paid for 40 hrs at ${wage}" +
+                $"/hr = ${salary}";
             Console.WriteLine("\n"+result+"\n");
             Console.WriteLine("*******************************************\n");
             return result;
@@ -25,10 +25,10 @@ namespace Polymorphism
         public override string CalculateWeeklySalary(int weeklyHours, int wage)
         {
             var salary = weeklyHours * wage;
-            
-            string result = string.Format("\n This Happy Contractor Worked {0} hrs." +
-                "Paid for {0} hrs at ${1}" +
-                "/hr = ${2} \n", weeklyHours, wage, salary);
+
+            string result = $"This Happy Contractor Worked {weeklyHours} hrs." +
+                $"Paid for {weeklyHours} hrs at ${wage}" +
+                $"/hr = ${salary}";
             Console.WriteLine("\n" + result + "\n");
             Console.WriteLine("*******************************************\n");
             return result;
@@ -41,15 +41,18 @@ namespace Polymorphism
         static void Main(string[] args)
         {
             const int hours = 55, wage = 70;
-            List<Employee> employees = GetEmployees();
+            List<Employee> employees = Utils.GetEmployees();
 
             foreach (var e in employees)
             {
                 e.CalculateWeeklySalary(hours, wage);
             }
         }
+    }
 
-        private static List<Employee> GetEmployees()
+    public static class Utils
+    {
+        public static List<Employee> GetEmployees()
         {
             var employees = new Employee();
             var contractors = new Contractor();
